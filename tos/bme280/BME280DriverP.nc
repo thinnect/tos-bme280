@@ -186,11 +186,11 @@ implementation {
 					}
 					if(m.humidity) {
 						m.humidity = FALSE;
-						signal Humidity.readDone(SUCCESS, comp_data.humidity/100.0);
+						signal Humidity.readDone(SUCCESS, comp_data.humidity/1024.0);
 					}
 					if(m.pressure) {
 						m.pressure = FALSE;
-						signal Pressure.readDone(SUCCESS, comp_data.pressure/1024.0);
+						signal Pressure.readDone(SUCCESS, comp_data.pressure/100.0);
 					}
 				}
 				else {
