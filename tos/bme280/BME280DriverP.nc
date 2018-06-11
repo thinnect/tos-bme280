@@ -232,6 +232,9 @@ implementation {
 	}
 
 	command error_t Temperature.read() {
+		if(m.state < STM_IDLE) {
+			return EOFF;
+		}
 		if(m.temperature) {
 			return EBUSY;
 		}
@@ -243,6 +246,9 @@ implementation {
 	}
 
 	command error_t Pressure.read() {
+		if(m.state < STM_IDLE) {
+			return EOFF;
+		}
 		if(m.pressure) {
 			return EBUSY;
 		}
@@ -254,6 +260,9 @@ implementation {
 	}
 
 	command error_t Humidity.read() {
+		if(m.state < STM_IDLE) {
+			return EOFF;
+		}
 		if(m.humidity) {
 			return EBUSY;
 		}
