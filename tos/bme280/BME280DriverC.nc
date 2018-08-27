@@ -13,7 +13,12 @@ configuration BME280DriverC {
 }
 implementation {
 
-	components new BME280DriverP(BME280_I2C_ADDR_SEC) as Sensor;
+	#ifndef BME280_I2C_ADDRESS
+	#warning BME280_I2C_ADDRESS not defined, using BME280_I2C_ADDR_PRIM
+	#define BME280_I2C_ADDRESS BME280_I2C_ADDR_PRIM
+	#endif//BME280_I2C_ADDRESS
+
+	components new BME280DriverP(BME280_I2C_ADDRESS) as Sensor;
 	SplitControl = Sensor;
 	Temperature = Sensor.Temperature;
 	Humidity = Sensor.Humidity;
