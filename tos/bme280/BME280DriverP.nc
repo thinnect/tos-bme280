@@ -143,19 +143,24 @@ implementation {
 			case STM_SETTINGS: {
 				int8_t rslt;
 
-				dev.settings.osr_h = BME280_OVERSAMPLING_4X;
-				dev.settings.osr_p = BME280_OVERSAMPLING_4X;
-				dev.settings.osr_t = BME280_OVERSAMPLING_4X;
-				dev.settings.filter = BME280_FILTER_COEFF_16;
-
-				rslt = bme280_set_sensor_settings(BME280_OSR_PRESS_SEL | BME280_OSR_TEMP_SEL | BME280_OSR_HUM_SEL | BME280_FILTER_SEL, &dev);
-				debug1("set=%d", rslt);
-
+				rslt = bme280_soft_reset(&dev);
 				if(rslt == BME280_OK) {
-					call Resource.release();
-					m.state = STM_IDLE;
-					signal SplitControl.startDone(SUCCESS);
+					dev.settings.osr_h = BME280_OVERSAMPLING_4X;
+					dev.settings.osr_p = BME280_OVERSAMPLING_4X;
+					dev.settings.osr_t = BME280_OVERSAMPLING_4X;
+					dev.settings.filter = BME280_FILTER_COEFF_OFF;
+
+					rslt = bme280_set_sensor_settings(BME280_OSR_PRESS_SEL | BME280_OSR_TEMP_SEL | BME280_OSR_HUM_SEL | BME280_FILTER_SEL, &dev);
+					debug1("set=%d", rslt);
+
+					if(rslt == BME280_OK) {
+						call Resource.release();
+						m.state = STM_IDLE;
+						signal SplitControl.startDone(SUCCESS);
+					}
+					else startFailure(__LINE__);
 				}
+				else startFailure(__LINE__);
 			}
 			break;
 			case STM_FORCE: {
