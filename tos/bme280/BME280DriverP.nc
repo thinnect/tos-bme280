@@ -399,11 +399,11 @@ implementation {
 		// while(!call HplI2C.isRealInterruptPending());
 		debug4("%02X", call HplI2C.status());
 
-		call HplI2C.enable(FALSE);
-		call HplI2C.setInterruptPending(TRUE);
-		call HplI2C.sendCommand();
+		// call HplI2C.enable(FALSE);
+		// call HplI2C.setInterruptPending(TRUE);
+		// call HplI2C.sendCommand();
 		// while(!call HplI2C.isRealInterruptPending());
-		debug4("%02X", call HplI2C.status());
+		// debug4("%02X", call HplI2C.status());
 
 		return rslt;
 	}
@@ -487,11 +487,11 @@ implementation {
 		// while(!call HplI2C.isRealInterruptPending());
 		debug4("%02X", call HplI2C.status());
 
-		call HplI2C.enable(FALSE);
-		call HplI2C.setInterruptPending(TRUE);
-		call HplI2C.sendCommand();
+		// call HplI2C.enable(FALSE);
+		// call HplI2C.setInterruptPending(TRUE);
+		// call HplI2C.sendCommand();
 		// while(!call HplI2C.isRealInterruptPending());
-		debug4("%02X", call HplI2C.status());
+		// debug4("%02X", call HplI2C.status());
 
 		return rslt;
 	}
